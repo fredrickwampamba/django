@@ -1,0 +1,34 @@
+{% include 'top.html' %}
+
+{% block content %}
+<table>
+    <thead>
+        <th>Delete</th>
+        <th>Edit</th>
+        <th>Id</th>
+        <th>Email</th>
+        <th>Username</th>
+        <th>Last Login</th>
+        <th>Is Superuser</th>
+        <th>Is Staff</th>
+        <th>Last Joined</th>
+        <th>Date Joined</th>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td><a href="{% url 'delete_user' user.id %}">Delete User</a></td>
+            <td><a href="{% url 'edit_user' user.id %}">Edit User</a></td>
+            <td>{{user.id}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.last_login}}</td>
+            <td>{{user.is_superuser}}</td>
+            <td>{{user.is_staff}}</td>
+            <td>{{user.last_login}}</td>
+            <td>{{user.date_joined}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
