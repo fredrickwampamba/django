@@ -5,6 +5,10 @@ from django.contrib.auth import login
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 # Create your views here.
+#Email sending 
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
 
 User = get_user_model()
 
@@ -12,6 +16,7 @@ def home(response):
     return HttpResponse("Home Page")
     
 def register(request):
+
     if request.method == "POST":
         form = NewUserForm(request.POST)
         if form.is_valid():
@@ -36,6 +41,16 @@ def delete_user(request, id):
 
     return render(request, "main/users.html", {"users" : users})
 
+def send_email_to(request):
+    email = EmailMessage(
+        'Test Email' ,
+        'Hello there, I am testing out this email. Nice day',
+        'noreply@kampalapolytechnicmengo.ac.ug', 
+        ['fredowampz@gmail.com',
+        ]
+    ).send()
+
+    return HttpResponse("<h1>Email has been sent successfully<h1>")
 # def edit_user(request, id):
     
 #     if id is not None:
